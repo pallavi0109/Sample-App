@@ -19,5 +19,5 @@
     lineinfile:
        path: /etc/sudoers
        regexp: '^usr1'
-       path: 'usr1    ALL=(ALL)       ALL'
+       line: 'usr1    ALL=(ALL)       ALL'
        validate: visudo -cf %s
