@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: yes
+  
+  tasks:
+  - name: Creating User Account
+    user:
+      name: "{{ item }}"
+      create_home: yes
+      groups: admin
+      shell: /bin/bash
+    loop:
+      - usr1
+      
+  - name: Backup of "sudoers file" 
+    command: cp -f /etc/sudoers /etc/sudoers.bkp
+    
+  - name: Add user to sudoers file and validate before saving
+    lineinfile:
+       path: /etc/sudoers
+       regexp: '^usr1'
+       path: 'usr1    ALL=(ALL)       ALL'
+       validate: visudo -cf %s
