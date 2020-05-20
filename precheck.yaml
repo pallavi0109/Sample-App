@@ -10,3 +10,14 @@
     register: os_release
   - debug:
        var: os_release.stdout
+  - name: Check For Package which requires upgarde
+    shell:
+       yum check-update
+    register: shellout
+  - copy:
+       content="{{ shellout.stdout }}"
+       dest=/tmp/yumpreoutput
+ 
+   
+       
+  
