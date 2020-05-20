@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: all
+  
+  tasks:
+  - ping:
+  - name: Check the OS- Release
+    shell:
+      cat /etc/os-release
+    register: os_release
+  - debug:
+       var: os_release.stdout
