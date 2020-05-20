@@ -13,7 +13,7 @@
   - name: Check For Package which requires upgarde
     yum:
       name: '*'
-      latest: yes
+      state: latest
       update_only: yes
 
     register: shellout
