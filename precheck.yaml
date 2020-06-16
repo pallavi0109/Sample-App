@@ -14,21 +14,26 @@
     shell: "ps -few"
     register: running_processoutput
 
+ - lineinfile:
+      line: " Hostname - {{ ansible_hostname }} {{running_processoutput}}"
+      path: /tmp/running_processoutput
+    delegate_to: localhost
+
   - copy:
       content="{{running_processoutput}}"
       dest=/tmp/current_process
 
   - name: precheck_script
-    script: /root/pre.sh
+    script: /etc/ansible/pre.sh
     register: precheck_output
 
   - lineinfile:
-      line: " Hostname - {{ ansible_hostname }} {{precheck_output.stdout}}"
+      line: " Hostname - {{ ansible_hostname }} {{precheck_output}}"
       path: /tmp/precheckoutput
     delegate_to: localhost
 
   - copy:
-      content="{{precheck_output.stdout}}"
+      content="{{precheck_output}}"
       dest=/tmp/prechekoutput
 
   - name: list secirity
@@ -36,14 +41,12 @@
       sudo  yum list-security --security
     register: precheck_security_output
 
-  - debug:
-      var: precheck_security_output.stdout_lines
-
+ 
   - lineinfile:
-      line: " Hostname - {{ ansible_hostname }} {{precheck_security_output.stdout}}"
+      line: " Hostname - {{ ansible_hostname }} {{precheck_security_output}}"
       path: /tmp/precheck_security_output
     delegate_to: localhost
 
   - copy:
-      content="{{precheck_security_output.stdout}}"
+      content="{{precheck_security_output}}"
       dest=/tmp/precheck_security_output
