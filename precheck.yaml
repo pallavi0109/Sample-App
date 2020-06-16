@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  become_user: root
   become: true
 
   tasks:
@@ -18,6 +17,9 @@
   - name: precheck_script
     shell: ls -l /etc/sysconfig/network-scripts/ifcfg-*;cat /etc/sysconfig/network-scripts/ifcfg-*
     register: precheck_output
+    
+  - debug:
+       var: precheck_output
     
   
   
