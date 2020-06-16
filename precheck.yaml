@@ -14,7 +14,7 @@
     shell: "ps -few"
     register: running_processoutput
 
- - lineinfile:
+  - lineinfile:
       line: " Hostname - {{ ansible_hostname }} {{running_processoutput}}"
       path: /tmp/running_processoutput
     delegate_to: localhost
