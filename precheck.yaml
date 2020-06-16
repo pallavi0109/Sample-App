@@ -12,7 +12,7 @@
 
   - name: Current runnig procees
     shell: "ps -few"
-    register: running_processoutput
+    register: running_processoutput.stdout_lines
 
   - copy:
       content="{{running_processoutput.stdout_lines}}"
