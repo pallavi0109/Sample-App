@@ -12,10 +12,10 @@
 
   - name: Current runnig procees
     shell: "ps -few"
-    register: running_processoutput.stdout_lines
+    register: running_processoutput
 
   - copy:
-      content="{{running_processoutput.stdout_lines}}"
+      content="{{running_processoutput}}"
       dest=/tmp/current_process
 
   - name: precheck_script
