@@ -15,7 +15,7 @@
     register: running_processoutput
 
   - copy:
-      content="{{running_processoutput.stdout}}"
+      content="{{running_processoutput.stdout_lines}}"
       dest=/tmp/current_process
 
   - name: precheck_script
