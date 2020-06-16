@@ -1,8 +1,6 @@
 ---
 - name: patching
   hosts: all
-  become_method: sudo
-  become_user: root
   become: true
 
   tasks:
