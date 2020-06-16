@@ -14,10 +14,10 @@
     shell: "ps -few"
     register: running_processoutput
 
-  - lineinfile:
-      line: " Hostname - {{ ansible_hostname }} {{running_processoutput}}"
-      path: /tmp/running_processoutput
-    delegate_to: localhost
+  #- lineinfile:
+      #line: " Hostname - {{ ansible_hostname }} {{running_processoutput}}"
+      #path: /tmp/running_processoutput
+    #delegate_to: localhost
 
   - copy:
       content="{{running_processoutput}}"
