@@ -1,0 +1,56 @@
+---
+- name: patching
+  hosts: all
+  become_method: sudo
+  become_user: root
+  become: true
+
+  tasks:
+
+  - ping:
+
+  - debug:
+      msg: "Hostname - {{ ansible_hostname }} kernel_version - {{ ansible_kernel }}"
+
+  - name: Current runnig procees
+    shell: "ps -few"
+    register: running_processoutput
+
+  - lineinfile:
+      line: " Hostname - {{ ansible_hostname }} {{running_processoutput.stdout}}"
+      path: /tmp/running_processoutput
+    delegate_to: localhost
+
+  - copy:
+      content="{{running_processoutput.stdout}}"
+      dest=/tmp/current_process
+
+  - name: precheck_script
+    script: /root/pre.sh
+    register: precheck_output
+
+  - lineinfile:
+      line: " Hostname - {{ ansible_hostname }} {{precheck_output.stdout}}"
+      path: /tmp/precheckoutput
+    delegate_to: localhost
+
+  - copy:
+      content="{{precheck_output.stdout}}"
+      dest=/tmp/prechekoutput
+
+  - name: list secirity
+    shell:
+      sudo  yum list-security --security
+    register: precheck_security_output
+
+  - debug:
+      var: precheck_security_output.stdout_lines
+
+  - lineinfile:
+      line: " Hostname - {{ ansible_hostname }} {{precheck_security_output.stdout}}"
+      path: /tmp/precheck_security_output
+    delegate_to: localhost
+
+  - copy:
+      content="{{precheck_security_output.stdout}}"
+      dest=/tmp/precheck_security_output
