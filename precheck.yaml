@@ -27,7 +27,5 @@
     shell: ls -l /etc/sysconfig/network-scripts/ifcfg-*;cat /etc/sysconfig/network-scripts/ifcfg-*
     register: precheck_output
     
-  - copy:
-      content:"{{precheck_output}}"
-      dest:/tmp/prechekoutput
+  
   
