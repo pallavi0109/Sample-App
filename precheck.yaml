@@ -11,6 +11,7 @@
   - debug:
       var: precheck_security_output
       
+  - script:  /root/pre.sh     
          
 
   
