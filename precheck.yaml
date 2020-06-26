@@ -19,6 +19,6 @@
       var: precheck_security_output
 
   - lineinfile:
-      line: " Hostname - {{ ansible_hostname }} {{precheck_security_output.stdout}}"
+      line: " Hostname - {{ ansible_hostname }} {{precheck_security_output}}"
       path: /tmp/precheck_security_output
     delegate_to: localhost
