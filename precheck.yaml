@@ -4,6 +4,6 @@
   remote_src: true
   tasks:
   -  name: shell script
-     script: /etc/ansible/pre.sh
+     script: ./pre.sh
 
   
