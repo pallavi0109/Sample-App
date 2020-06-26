@@ -16,7 +16,7 @@
     register: precheck_security_output
 
   - debug:
-      var: precheck_security_output.stdout_lines
+      var: precheck_security_output
 
   - lineinfile:
       line: " Hostname - {{ ansible_hostname }} {{precheck_security_output.stdout}}"
