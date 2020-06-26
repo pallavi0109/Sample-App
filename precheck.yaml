@@ -4,6 +4,6 @@
   
   tasks:
   -  name: shell script
-     script: ./pre.sh
+     script: /etc/ansible/pre.sh
 
   
