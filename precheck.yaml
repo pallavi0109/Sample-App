@@ -7,10 +7,10 @@
      script: /etc/ansible/pre.sh
   -  name: List Security Updates
      shell:
-         yum list-security --security
-      register: shellout
-      debug:
-        var: shellout 
+       yum list-security --security
+     register: shellout
+     debug:
+       var: shellout 
       
          
 
