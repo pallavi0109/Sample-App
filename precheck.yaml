@@ -3,12 +3,13 @@
   become_user: root
   
   tasks:
-  - name: List Security Updates
+  - name: list secirity
     shell:
       yum list-security --security
-    register: shellout
+    register: precheck_security_output
+
   - debug:
-       var: shellout 
+      var: precheck_security_output
       
          
 
