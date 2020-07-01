@@ -22,7 +22,15 @@
   - copy:
       content="{{running_processoutput.stdout}}"
       dest=/tmp/current_process
-
+     
+  - name: Copy file with owner and permissions
+    copy:
+      src: /tmp/pre.sh
+      dest: /tmp/pre.sh
+      owner: ans
+      group: ans
+      mode: '777'
+ 
   - name: precheck_script
     shell: 
       /tmp/pre.sh
