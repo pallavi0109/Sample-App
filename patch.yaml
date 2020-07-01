@@ -38,7 +38,8 @@
       dest=/tmp/patched_output
 
   - name: Perform_reboot Post patching
-    command: shutdown -r +1 "Rebooting System After Patching"
+    command: 
+       sudo reboot
 
   - name: Wait 300 seconds
     wait_for_connection:
