@@ -1,0 +1,22 @@
+---
+- name: patching
+  hosts: all
+  become_user: root
+ 
+
+  tasks:
+
+  - ping:
+
+  - debug:
+      msg: "Hostname - {{ ansible_hostname }} kernel_version - {{ ansible_kernel }}"
+
+  - name: precheck_script
+    shell: 
+      /etc/ansible/pre.sh
+    register: precheck_output
+
+  - lineinfile:
+      line: " Hostname - {{ ansible_hostname }} {{precheck_output.stdout}}"
+      path: /tmp/precheckoutput
+    delegate_to: 10.128.0.2
