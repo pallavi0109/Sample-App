@@ -27,6 +27,7 @@
     copy:
       src: /tmp/pre.sh
       dest: /tmp/pre.sh
+      remote_src: yes
       owner: ans
       group: ans
       mode: '777'
