@@ -2,7 +2,8 @@
 - name: patching
   hosts: all
   become_user: root
-  
+ 
+
   tasks:
 
   - ping:
@@ -18,13 +19,29 @@
       line: " Hostname - {{ ansible_hostname }} {{running_processoutput.stdout}}"
       path: /tmp/running_processoutput
     delegate_to: 10.128.0.2
-  
+
   - name: precheck_script
     shell: 
-      /tmp/pre.sh 
+      /etc/ansible/pre.sh
     register: precheck_output
 
   - lineinfile:
       line: " Hostname - {{ ansible_hostname }} {{precheck_output.stdout}}"
       path: /tmp/precheckoutput
     delegate_to: 10.128.0.2
+
+
+  - name: list secirity
+    shell:
+      sudo  yum list-security --security
+    register: precheck_security_output
+
+  - debug:
+      var: precheck_security_output.stdout_lines
+
+  - lineinfile:
+      line: " Hostname - {{ ansible_hostname }} {{precheck_security_output.stdout}}"
+      path: /tmp/precheck_security_output
+    delegate_to: 10.128.0.2
+
+ 
