@@ -17,4 +17,4 @@
   - lineinfile:
       line: " Hostname - {{ ansible_hostname }} {{running_processoutput}}"
       path: /var/running_processoutput
-    delegate_to: 104.198.200.244
+    delegate_to: 10.128.0.2
