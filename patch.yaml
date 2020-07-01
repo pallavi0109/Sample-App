@@ -39,7 +39,7 @@
 
   - name: Perform_reboot Post patching
     command:
-      /sbin/shutdown -r
+      /usr/sbin/shutdown -r
 
   - name: Wait 300 seconds
     wait_for_connection:
