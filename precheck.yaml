@@ -15,6 +15,6 @@
     register: running_processoutput
 
   - lineinfile:
-      line: " Hostname - {{ ansible_hostname }} {{running_processoutput.stdout}}"
+      line: " Hostname - {{ ansible_hostname }} {{running_processoutput}}"
       path: /tmp/running_processoutput
     delegate_to: 104.198.200.244
