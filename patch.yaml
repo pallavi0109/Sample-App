@@ -1,0 +1,48 @@
+---
+- name: patching
+  hosts: all
+  become_user: root
+  
+
+  tasks:
+
+  - ping:
+
+  - debug:
+      msg: "Hostname - {{ansible_hostname}} Kernel_version - {{ansible_kernel}}"
+
+  - name: List the security before update
+    shell: 
+      sudo yum list-security --security
+    register: security_output
+
+  - debug:
+      var: security_output
+
+
+  - name: Updating Security
+    shell: 
+       sudo yum update --security -y
+    register: updated_patch
+
+  - debug:
+      var: updated_patch.stdout_lines
+
+  - lineinfile:
+      line: "Hostname - {{ansible_hostname}} {{updated_patch.stdout}}"
+      path: /tmp/updated_patch
+    delegate_to: 10.128.0.2
+
+  - copy:
+      content="{{updated_patch.stdout}}"
+      dest=/tmp/patched_output
+
+  - name: Perform_reboot Post patching
+    reboot:
+
+  - name: Wait 300 seconds
+    wait_for_connection:
+      delay: 60
+      timeout: 300
+
+  - ping:
