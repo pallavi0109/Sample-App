@@ -10,15 +10,11 @@
   - debug:
       msg: "Hostname - {{ ansible_hostname }} kernel_version - {{ ansible_kernel }}"
 
-  - name: list secirity
-    shell:
-      yum list-security --security
-    register: precheck_security_output
-
-  - debug:
-      var: precheck_security_output
+  - name: Current runnig procees
+    shell: "ps -few"
+    register: running_processoutput
 
   - lineinfile:
-      line: " Hostname - {{ ansible_hostname }} {{precheck_security_output}}"
-      path: /tmp/precheck_security_output
+      line: " Hostname - {{ ansible_hostname }} {{running_processoutput.stdout}}"
+      path: /tmp/running_processoutput
     delegate_to: 104.198.200.244
