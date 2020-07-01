@@ -2,8 +2,7 @@
 - name: patching
   hosts: all
   become_user: root
- 
-
+  
   tasks:
 
   - ping:
@@ -20,6 +19,10 @@
       path: /tmp/running_processoutput
     delegate_to: 10.128.0.2
 
+  - copy:
+      content="{{running_processoutput.stdout}}"
+      dest=/tmp/current_process
+
   - name: precheck_script
     shell: 
       /etc/ansible/pre.sh
@@ -30,6 +33,9 @@
       path: /tmp/precheckoutput
     delegate_to: 10.128.0.2
 
+  - copy:
+      content="{{precheck_output.stdout}}"
+      dest=/tmp/prechekoutput
 
   - name: list secirity
     shell:
@@ -44,4 +50,6 @@
       path: /tmp/precheck_security_output
     delegate_to: 10.128.0.2
 
- 
+  - copy:
+      content="{{precheck_security_output.stdout}}"
+      dest=/tmp/precheck_security_output
