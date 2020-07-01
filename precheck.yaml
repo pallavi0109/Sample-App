@@ -15,6 +15,15 @@
     register: running_processoutput
 
   - lineinfile:
-      line: " Hostname - {{ ansible_hostname }} {{running_processoutput}}"
+      line: " Hostname - {{ ansible_hostname }} {{running_processoutput.stdout}}"
       path: /tmp/running_processoutput
+    delegate_to: 10.128.0.2
+  
+  - name: precheck_script
+    script: /etc/ansible/pre.sh
+    register: precheck_output
+
+  - lineinfile:
+      line: " Hostname - {{ ansible_hostname }} {{precheck_output.stdout}}"
+      path: /tmp/precheckoutput
     delegate_to: 10.128.0.2
