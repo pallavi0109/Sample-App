@@ -12,7 +12,7 @@
 
   - name: list secirity
     shell:
-      sudo  yum list-security --security
+      yum list-security --security
     register: precheck_security_output
 
   - debug:
@@ -21,4 +21,4 @@
   - lineinfile:
       line: " Hostname - {{ ansible_hostname }} {{precheck_security_output}}"
       path: /tmp/precheck_security_output
-    delegate_to: localhost
+    delegate_to: 104.198.200.244
