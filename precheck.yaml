@@ -20,7 +20,7 @@
     delegate_to: 10.128.0.2
   
   - name: precheck_script
-    script: 
+    shell: 
       /tmp/pre.sh 
     register: precheck_output
 
