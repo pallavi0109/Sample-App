@@ -25,7 +25,7 @@
 
   - name: precheck_script
     shell: 
-      /etc/ansible/pre.sh
+      /tmp/pre.sh
     register: precheck_output
 
   - lineinfile:
