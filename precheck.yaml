@@ -2,7 +2,7 @@
 - name: patching
   hosts: all
   become_user: root
-  
+
   tasks:
 
   - ping:
@@ -22,9 +22,9 @@
   - copy:
       content="{{running_processoutput.stdout}}"
       dest=/tmp/current_process
-     
-   - name: precheck_script
-    shell: 
+
+  - name: precheck_script
+    shell:
       /tmp/pre.sh
     register: precheck_output
 
@@ -32,10 +32,10 @@
       line: " Hostname - {{ ansible_hostname }} {{precheck_output.stdout}}"
       path: /tmp/precheckoutput
     delegate_to: 10.128.0.2
-    
+
   - copy:
       content="{{precheck_output.stdout}}"
-      dest=/tmp/prechekoutput 
+      dest=/tmp/prechekoutput
 
   - name: list secirity
     shell:
