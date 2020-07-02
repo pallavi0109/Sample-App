@@ -13,7 +13,7 @@
 
   - name: precheck_script
     shell: 
-      /tmp/pre.sh
+      /root/pre.sh
     register: precheck_output
 
   - lineinfile:
