@@ -3,6 +3,6 @@
   become_user: true
   tasks:
   - copy:
-      src: /etc/ansible/pa.sh
+      src: /etc/ansible/test/pa.sh
       dest: /tmp/pa.sh
       remote_src: no
