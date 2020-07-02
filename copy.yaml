@@ -1,8 +1,15 @@
 ---
 - hosts: all
-  become_user: true
+  become_user: root
+  
+
   tasks:
-  - copy:
+  - name: Copy file with owner and permissions
+    copy:
       src: /etc/ansible/test/pa.sh
       dest: /tmp/pa.sh
       remote_src: no
+      owner: ans
+      group: ans
+      mode: '777'
+
