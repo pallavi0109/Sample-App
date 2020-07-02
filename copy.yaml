@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become_user: true
+  tasks:
+  - copy:
+      src: /etc/ansible/pa.sh
+      dest: /tmp/pa.sh
+      remote_src: no
