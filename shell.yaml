@@ -19,7 +19,7 @@
   - lineinfile:
       line: " Hostname - {{ ansible_hostname }} {{precheck_output.stdout}}"
       path: /tmp/precheckoutput
-    delegate_to: 10.128.0.2
+    delegate_to: x.x.x.
     
   - copy:
       content="{{precheck_output.stdout}}"
