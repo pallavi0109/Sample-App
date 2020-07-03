@@ -1,13 +1,10 @@
 ---
 - hosts: all
   become_user: root
-  
   tasks:
-  - name: Copy file with owner and permissions
+  - name: Copy a "sudoers" file on the remote machine for editing
     copy:
-      src: /etc/ansible/pre.sh
-      dest: /tmp/test
-      remote_src: no
-      owner: ans
-      group: ans
-      mode: '777
+     src: /etc/ansible/pre.sh
+     dest: /tmp/test
+     remote_src: no
+    
