@@ -31,7 +31,7 @@
   - lineinfile:
       line: "Hostname - {{ansible_hostname}} {{updated_patch.stdout}}"
       path: /tmp/updated_patch
-    delegate_to: 10.128.0.2
+    delegate_to: 
 
   - copy:
       content="{{updated_patch.stdout}}"
