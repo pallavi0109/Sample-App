@@ -1,0 +1,57 @@
+---
+- name: patching
+  hosts: all
+  become_user: root
+  
+
+  tasks:
+
+  - ping:
+
+  - debug:
+      msg: "Hostname - {{ ansible_hostname }} kernel_version - {{ ansible_kernel }}"
+
+  - name: Current runnig procees
+    shell: "ps -few"
+    register: post_running_processoutput
+
+  - lineinfile:
+      line: " Hostname - {{ ansible_hostname }} {{post_running_processoutput.stdout_lines}}"
+      path: /tmp/post_running_processoutput
+    delegate_to: 10.128.0.2
+
+  - copy:
+      content="{{post_running_processoutput.stdout_lines}}"
+      dest=/tmp/post_current_process
+
+  - name: postcheck_script
+    shell: 
+      /tmp/pre.sh
+    register: postcheck_output
+
+  - lineinfile:
+      line: " Hostname - {{ ansible_hostname }} {{postcheck_output.stdout}}"
+      path: /tmp/postcheck_output
+    delegate_to: 10.128.0.2
+
+  - copy:
+      content="{{postcheck_output.stdout}}"
+      dest=/tmp/postchekoutput
+
+  - name: list secirity
+    shell:
+      sudo  yum list-security --security
+    register: postcheck_security_output
+
+  - debug:
+      var: postcheck_security_output.stdout_lines
+
+  - lineinfile:
+      line: " Hostname - {{ ansible_hostname }} {{postcheck_security_output.stdout}}"
+      path: /tmp/postcheck_security_output
+    delegate_to: 10.128.0.2
+
+  - copy:
+      content="{{postcheck_security_output.stdout}}"
+      dest=/tmp/postcheck_security_output
+
