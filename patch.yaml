@@ -22,7 +22,7 @@
 
   - name: Updating Security
     shell: 
-       sudo yum update --security -y
+      yum update --security -y
     register: updated_patch
 
   - debug:
