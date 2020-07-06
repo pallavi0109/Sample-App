@@ -5,6 +5,6 @@
   - name: Copy a "sudoers" file on the remote machine for editing
     copy:
      src: /tmp/pre.sh
-     dest: /tmp/test
+     dest: /tmp/test/pre.sh
      remote_src: no
     
