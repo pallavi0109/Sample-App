@@ -17,7 +17,7 @@
   - lineinfile:
       line: " Hostname - {{ ansible_hostname }} {{running_processoutput.stdout}}"
       path: /tmp/running_processoutput
-    delegate_to: 10.128.0.2
+    delegate_to: 
 
   - copy:
       content="{{running_processoutput.stdout}}"
@@ -31,7 +31,7 @@
   - lineinfile:
       line: " Hostname - {{ ansible_hostname }} {{precheck_output.stdout}}"
       path: /tmp/precheckoutput
-    delegate_to: 10.128.0.2
+    delegate_to: 
 
   - copy:
       content="{{precheck_output.stdout}}"
@@ -48,8 +48,7 @@
   - lineinfile:
       line: " Hostname - {{ ansible_hostname }} {{precheck_security_output.stdout}}"
       path: /tmp/precheck_security_output
-    delegate_to: 10.128.0.2
-
+    delegate_to: 
   - copy:
       content="{{precheck_security_output.stdout}}"
       dest=/tmp/precheck_security_output
