@@ -12,16 +12,15 @@
       msg: "Hostname - {{ansible_hostname}} Kernel_version - {{ansible_kernel}}"
 
   - name: restart system
-    command: shutdown -r +1 "Rebooting System After Patching"
-    async: 0
-    poll: 0
+    command: 
+       sudo reboot
     register: reboot_started
     ignore_errors: true
 
 
   - name: pause for 180 secs
     pause:
-      minutes: 3
+      minutes: 2
 
 
   - name: check if system responding to ssh
