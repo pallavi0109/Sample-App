@@ -2,7 +2,7 @@
 - hosts: all
   become_user: root
   tasks:
-  - name: Copy a "sudoers" file on the remote machine for editing
+  - name: Copy file on the remote machine for editing
     copy:
      src: /tmp/pre.sh
      dest: /tmp/test/pre.sh
