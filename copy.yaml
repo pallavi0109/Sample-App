@@ -4,7 +4,7 @@
   tasks:
   - name: Copy a "sudoers" file on the remote machine for editing
     copy:
-     src: /etc/ansible/pre.sh
+     src: /tmp/pre.sh
      dest: /tmp/test
      remote_src: no
     
